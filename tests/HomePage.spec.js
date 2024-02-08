@@ -17,8 +17,96 @@ test.beforeEach(async({page})=>{
     await expect(page).toHaveURL('https://geekyants.com/'); 
    
   })
+  test('HomePage_Header Elements', async ({ page }) => {
 
-test('scroll and verify homepage elements_UI', async ({ page }) => {
+
+    const ele = page.getByRole('heading', { name: 'Our Team' });
+    ele.scrollIntoViewIfNeeded();
+    await page.waitForTimeout(2000);
+    
+    //Header_WhatweDo left tab elements(onHover)
+    await page.getByRole('navigation').getByRole('link', { name: 'What We Do' }).hover();
+    await expect(page.locator('li').filter({ hasText: /^Services$/ })).toBeVisible();
+    await expect(page.locator('li').filter({ hasText: /^Industries$/ })).toBeVisible();
+    await expect(page.locator('li').filter({ hasText: /^Customizable Solutions$/ })).toBeVisible();
+    await expect(page.locator('li').filter({ hasText: /^R&D$/ })).toBeVisible();
+    await expect(page.locator('li').filter({ hasText: /^Open-Source$/ })).toBeVisible();
+    
+    //WhatweDo_Services tab elements(onHover)
+    await page.getByRole('link', { name: 'Services', exact: true }).hover();
+    await expect(page.locator('#service li').filter({ hasText: 'Web App DevelopmentEnd-to-end' })).toBeVisible();
+    await expect(page.locator('#service li').filter({ hasText: 'Mobile App DevelopmentRobust' })).toBeVisible();
+    await expect(page.locator('#service li').filter({ hasText: 'Quality Assurance & Software' })).toBeVisible();
+    await expect(page.locator('#service li').filter({ hasText: 'UI/UX DesignUnique user' })).toBeVisible();
+    await expect(page.locator('#service li').filter({ hasText: 'Business AnalysisDiscover' })).toBeVisible();
+    await expect(page.locator('#service li').filter({ hasText: 'Full-stack DevelopmentRobust' })).toBeVisible();
+    await expect(page.getByText('See All Services')).toBeVisible();
+
+    //WhatweDo_Industries tab elements(onHover)
+    await page.getByRole('link', { name: 'Industries' }).hover();
+    await expect(page.locator('#solution li').filter({ hasText: 'ManufacturingInnovative apps' })).toBeVisible();
+    await expect(page.locator('#solution li').filter({ hasText: 'FintechSafe and customized' })).toBeVisible();
+    await expect(page.locator('#solution li').filter({ hasText: 'HealthcareRobust healthcare' })).toBeVisible();
+    await expect(page.locator('#solution li').filter({ hasText: 'E-commerceHigh-performing,' })).toBeVisible();
+    await expect(page.locator('#solution li').filter({ hasText: 'EducationApplications with' })).toBeVisible();
+    await expect(page.locator('#solution li').filter({ hasText: 'Travel & HospitalityUser-' })).toBeVisible();
+    await expect(page.getByText('See All Industries')).toBeVisible();
+
+     //WhatweDo_CustomizableSoutions tab elements(onHover)
+     await page.getByRole('link', { name: 'Customizable Solutions' }).hover();
+     await expect(page.locator('#app li').filter({ hasText: 'E‑commerce Web AppA' })).toBeVisible();
+     await expect(page.locator('#app li').filter({ hasText: 'Twitter Spaces CloneA' })).toBeVisible();
+     await expect(page.locator('#app li').filter({ hasText: 'Chat and Messaging AppA' })).toBeVisible();
+     await expect(page.locator('#app li').filter({ hasText: 'Telemedicine AppA solution' })).toBeVisible();
+     await expect(page.locator('#app li').filter({ hasText: 'Food and Grocery Delivery' })).toBeVisible();
+     await expect(page.locator('#app li').filter({ hasText: 'Bike Taxi Booking AppA' })).toBeVisible();
+     await expect(page.getByText('See All Customizable Solutions')).toBeVisible();
+
+     //WhatweDo_RnD tab elements(onHover)
+     await page.getByRole('link', { name: 'R&D' }).hover();
+     await expect(page.locator('#research').getByRole('listitem')).toBeVisible();
+
+     //WhatweDo_Open-Source tab elements(onHover)
+     await page.getByRole('link', { name: 'Open-Source', exact: true }).hover();
+     await expect(page.locator('#open-source li').filter({ hasText: 'gluestack-uiReact & React' })).toBeVisible();
+     await expect(page.locator('#open-source li').filter({ hasText: 'gluestack-ui-flutter [' })).toBeVisible();
+     await expect(page.locator('#open-source li').filter({ hasText: 'NativeBaseOpen-source UI' })).toBeVisible();
+     await expect(page.getByText('See All Products')).toBeVisible();
+
+     //Header_Technology tab elements(onHover)
+    await page.getByRole('navigation').getByRole('link', { name: 'Technologies' }).hover();
+    await expect(page.getByRole('navigation').getByText('React NativeNext.')).toBeVisible();
+    await expect(page.getByRole('navigation').getByRole('link', { name: 'Next.js' })).toBeVisible();
+    await expect(page.getByRole('navigation').getByRole('link', { name: 'Flutter' })).toBeVisible();
+    await expect(page.getByRole('navigation').getByRole('link', { name: 'GraphQL' })).toBeVisible();
+    await expect(page.getByRole('navigation').getByRole('link', { name: 'Node.js' })).toBeVisible();
+    await expect(page.getByRole('navigation').getByRole('link', { name: 'PostgreSQL' })).toBeVisible();
+    await expect(page.getByRole('navigation').getByRole('link', { name: 'DevOps' })).toBeVisible();
+
+    //Header_AboutUs tab elements(onHover)
+    await page.getByRole('link', { name: 'About Us', exact: true }).hover();
+    await expect(page.locator('li').filter({ hasText: 'About usDiscover how we' }).nth(1)).toBeVisible();
+    await expect(page.locator('li').filter({ hasText: 'TeamMeet the geeks behind the' }).nth(1)).toBeVisible();
+    await expect(page.locator('li').filter({ hasText: 'LeadersDive into the' }).nth(1)).toBeVisible();
+    await expect(page.locator('li').filter({ hasText: 'Join usDiscover how we embody' }).nth(1)).toBeVisible();
+    await expect(page.locator('li').filter({ hasText: 'CultureTake a sneak peek of' }).nth(1)).toBeVisible();
+
+     //Header_Insights tab elements(onHover)
+     await page.getByRole('navigation').getByRole('link', { name: 'Insights', exact: true }).hover();
+     await expect(page.locator('li').filter({ hasText: 'BlogIndustry trends decoded' }).nth(1)).toBeVisible();
+     await expect(page.locator('li').filter({ hasText: 'GuidesPlaybooks to achieve' }).nth(1)).toBeVisible();
+
+     //Let's Talk and Language/locale elements
+     await expect(page.getByRole('navigation').getByRole('link', { name: 'let\'s talk' })).toBeVisible();
+     await expect(page.getByRole('link', { name: 'Globe' })).toBeVisible();
+     await page.getByRole('link', { name: 'Globe' }).hover();
+     await expect(page.locator('div').filter({ hasText: /^Global$/ })).toBeVisible();
+     await expect(page.locator('div').filter({ hasText: /^UK$/ })).toBeVisible();
+     
+   })
+
+
+test('HomePage_Scroll and Verify UI', async ({ page }) => {
 
   
     // Expect a title "to contain" a substring.
@@ -129,13 +217,101 @@ test('scroll and verify homepage elements_UI', async ({ page }) => {
     //OpenSource   
     await expect(page.getByRole('article').locator('#open-source')).toBeVisible(); 
 
-         //await expect().toBeVisible();
-    //Customizable Solutions
-    //OutTeam&Culture
-    //Insights
-    //Client Stories
-    //Footer
+    await expect(page.getByRole('heading', { name: 'Open Source' })).toBeVisible();
+    await expect(page.getByText('Open-source advocates,')).toBeVisible();
+    await expect(page.getByRole('link', { name: 'View Open-Source Contributions' })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'gluestack-ui gluestack-ui' })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'NativeBase NativeBase An open' })).toBeVisible();
 
+    //Customizable Solutions
+    await expect(page.locator('[id="__next"] div').filter({ hasText: 'Customisable SolutionsNavigate through various solutions and clones of popular' }).nth(2)).toBeVisible(); 
+
+    await expect(page.getByRole('heading', { name: 'Customisable Solutions' })).toBeVisible();
+    await expect(page.getByText('Navigate through various')).toBeVisible();
+    await expect(page.getByRole('link', { name: 'View Showcase Applications' })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Supply Chain Management App' })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Telemedicine App Telemedicine' })).toBeVisible();
+
+    //OutTeam&Culture
+    const ele = page.getByRole('heading', { name: 'Our Team' });
+    ele.scrollIntoViewIfNeeded();
+
+     await expect(page.getByRole('heading', { name: 'Our Team' })).toBeVisible();
+     await expect(page.getByText('We are a family of innovative')).toBeVisible();
+     await expect(page.getByRole('link', { name: 'Meet the Team' })).toBeVisible();
+
+     await expect(page.getByRole('heading', { name: 'Our Culture' })).toBeVisible();
+     await expect(page.getByText('We believe in being early')).toBeVisible();
+     await expect(page.getByRole('link', { name: 'Our Cultural Insights' })).toBeVisible();
+       
+    //Insights
+    await expect(page.locator('#blog')).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Insights' })).toBeVisible();
+    await expect(page.getByText('Discover the inner workings')).toBeVisible();
+    await expect(page.getByRole('link', { name: 'More Blogs' })).toBeVisible();
+
+    await expect(page.locator('[id="blog"] div div>div:nth-child(3)').first()).toBeVisible();
+
+
+    //Client Stories
+    await expect(page.locator('[id="__next"] div').filter({ hasText: 'Client StoriesListen to what' }).nth(2)).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Client Stories' })).toBeVisible();
+    await expect(page.getByText('Listen to what our clients')).toBeVisible();
+    await expect(page.getByRole('img', { name: 'Client Video' })).toBeVisible();
+   
+    //Footer1
+    await expect(page.locator('#footer')).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Let’s Build Your Product' })).toBeVisible();
+    await expect(page.getByText('Get a free discovery session')).toBeVisible();
+    await expect(page.locator('#footer').getByRole('link', { name: 'let\'s talk' })).toBeVisible();
+
+   //Footer2
+    await expect(page.locator('footer')).toBeVisible();
+    await expect(page.locator('footer').getByRole('img', { name: 'GeekyAnts', exact: true })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'ISO' })).toBeVisible();
+    await expect(page.getByRole('img', { name: 'GMS' })).toBeVisible();
+    await expect(page.getByRole('img', { name: 'AIAO_BAR' })).toBeVisible();
+
+    await expect(page.getByText('connect')).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Instagram GeekyAnts' })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Facebook GeekyAnts' })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Twitter GeekyAnts' })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'LinkedIn GeekyAnts' })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'YouTube GeekyAnts' })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Discord GeekyAnts' })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Medium GeekyAnts' })).toBeVisible();
+
+    await expect(page.getByText('Quick Links')).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Hire us' })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Join us' })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Events & conferences' })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Developer Environment Security' })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Partner Program' })).toBeVisible();
+    await expect( page.getByRole('link', { name: 'Financial Reports' })).toBeVisible();
+
+    await expect(page.getByText('hire developer')).toBeVisible();
+    await expect(page.locator('footer').getByRole('link', { name: 'React Native' })).toBeVisible();
+    await expect(page.locator('footer').getByRole('link', { name: 'Next.js' })).toBeVisible();
+    await expect(page.locator('footer').getByRole('link', { name: 'Flutter' })).toBeVisible();
+    await expect(page.locator('a').filter({ hasText: 'GraphQL' })).toBeVisible();
+    await expect(page.locator('footer').getByRole('link', { name: 'Node.js' })).toBeVisible();
+    await expect(page.locator('footer').getByRole('link', { name: 'PostgreSQL' })).toBeVisible();
+    await expect(page.locator('a').filter({ hasText: 'DevOps' })).toBeVisible();
+    
+    await expect(page.getByText('engagement model')).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Fixed Scope' })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Dedicated Team' })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Agile Product' })).toBeVisible();
+
+    await expect(page.getByRole('img', { name: 'WorkWith' })).toBeVisible();
+    await expect(page.getByRole('img', { name: 'Clutch' })).toBeVisible();
+    await expect(page.getByRole('img', { name: 'AppFutura' })).toBeVisible();
+    await expect(page.getByRole('img', { name: 'GoodFirms' })).toBeVisible();
+    await expect(page.getByRole('img', { name: 'DesignRush' })).toBeVisible();
+    await expect(page.getByRole('img', { name: 'TopDevelopers' })).toBeVisible();
+
+    await expect(page.getByText('GeekyAnts India Pvt LtdNo. 18, 2nd Cross Road, N S Palya, 2nd StageBTM Layout, Bangalore - 560076, Karnataka, India +91 9595884422GeekyAnts UK LtdSPACES Finsbury Park, 17 City North Place, London N4 3FU, England, UK+44 (0)2080146956GeekyAnts Inc315 Montgomery Street, 9th & 10th floors,San Francisco, CA, 94104, USA+1 (415)')).toBeVisible();
+    
 });
 
 test.afterEach(async({page})=>{
